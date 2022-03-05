@@ -10,7 +10,6 @@ namespace ArrayTests
         [InlineData(32)]
         [InlineData(64)]
         [InlineData(128)]
-        [InlineData(256)]
         public void Check_Array_Constructor(int defaultSize)
         {
             // Arrange | Act
