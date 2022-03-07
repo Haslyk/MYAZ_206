@@ -40,7 +40,8 @@ namespace DataStructures.Arrray
 
         public IEnumerator GetEnumerator()
         {
-            return InnerArray.GetEnumerator();
+            //return InnerArray.GetEnumerator();
+            return new ArrayEnumerator(InnerArray);
         }
     }
 }
