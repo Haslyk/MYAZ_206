@@ -1,25 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
-namespace DataStructures.Arrray
+namespace DataStructures.Array
 {
     public class Array : ICloneable, IEnumerable
     {
-        private Object[] InnerArray { get; set; }
+        protected Object[] InnerArray { get; set; }
         public int Length => InnerArray.Length;
 
-        public Array(int defaultSize=16)
+        public Array(int defaultSize = 16)
         {
-            InnerArray = new Object[defaultSize]; // fixed size
+            InnerArray = new Object[defaultSize];  // fixed size
         }
 
         public Array(params Object[] sourceArray) : this(sourceArray.Length)
         {
-            System.Array.Copy(sourceArray,InnerArray,sourceArray.Length);
+            System.Array.Copy(sourceArray, InnerArray, Length);
+            //for (int i = 0; i < sourceArray.Length; i++)
+            //{
+            //    InnerArray[i] = sourceArray[i];
+            //}
         }
 
         public Object GetValue(int index)
         {
-            if (!(index>=0 && index<InnerArray.Length))
+            if (!(index >= 0 && index < InnerArray.Length))
                 throw new ArgumentOutOfRangeException();
             return InnerArray[index];
         }
@@ -27,9 +33,8 @@ namespace DataStructures.Arrray
         {
             if (!(index >= 0 && index < InnerArray.Length))
                 throw new ArgumentOutOfRangeException();
-            if(value==null)
+            if (value == null)
                 throw new ArgumentNullException();
-            
             InnerArray[index] = value;
         }
 
@@ -40,8 +45,18 @@ namespace DataStructures.Arrray
 
         public IEnumerator GetEnumerator()
         {
-            //return InnerArray.GetEnumerator();
-            return new ArrayEnumerator(InnerArray);
+            // return InnerArray.GetEnumerator();
+            return new CustomArrayEnumerator(InnerArray);
+        }
+
+        public int IndexOf(Object value)
+        {
+            for (int i = 0; i < InnerArray.Length; i++)
+            {
+                if (GetValue(i).Equals(value))
+                    return i;
+            }
+            return -1; // O(n)
         }
     }
 }

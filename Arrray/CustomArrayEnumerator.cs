@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 
-namespace DataStructures.Arrray
+namespace DataStructures.Array
 {
-    internal class ArrayEnumerator : IEnumerator
+    public class CustomArrayEnumerator : IEnumerator
     {
         private Object[] innerArray; 
-        public int index; 
+        public int index = -1; 
         public object Current => innerArray[index];
 
-        public ArrayEnumerator(Object[] arr)
+        public CustomArrayEnumerator(Object[] arr)
         {
             innerArray = arr;
             index = innerArray.Length;
